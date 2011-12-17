@@ -25,10 +25,10 @@
 .gritter-item-wrapper {
 	position:relative;
 	margin:0 0 10px 0;
-	background:url('../images/ie-spacer.gif'); /* ie7/8 fix */ 
 }
 .gritter-item {
 	display:block;
+	background-color: #000; /* ie8 */
 	background-color: rgba(0,0,0,0.8);
 	color:#eee;
 	padding:11px;
@@ -40,7 +40,9 @@
 	border-radius: 10px;
 }
 .hover .gritter-item {
-	border: 2px solid rgba(255,255,255,0.85);
+	border: 2px solid;
+	border-color: #fff; /* ie8 */
+	border-color: rgba(255,255,255,0.85);
 }
 .gritter-item p {
 	padding:0;
@@ -78,11 +80,14 @@
 /* for the light (white) version of the gritter notice */
 .gritter-light .gritter-item {
 	border: 2px solid transparent;
+	background-color: #fff; /* ie8 */
     background-color: rgba(255,255,255,0.8);
     color: #222;
 }
 .gritter-light.hover .gritter-item {
-	border: 2px solid rgba(0,0,0,0.65);
+	border: 2px solid;
+	border-color: #000; /* ie8 */
+	border-color: rgba(0,0,0,0.65);
 }
 .gritter-light .gritter-title {
     text-shadow: none;
