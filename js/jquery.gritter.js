@@ -79,7 +79,7 @@
 		_item_count: 0,
 		_is_setup: 0,
 		_tpl_close: '<div class="gritter-close"></div>',
-		_tpl_item: '<div id="gritter-item-[[number]]" class="gritter-item-wrapper [[item_class]]" style="display:none"><div class="gritter-item">[[close]][[image]]<div class="[[class_name]]"><div class="gritter-title">[[username]]</div><div class="gritter-content">[[text]]</div></div><div style="clear:both"></div></div></div>',
+		_tpl_item: '<div id="gritter-item-[[number]]" class="gritter-item-wrapper [[item_class]]" style="display:none"><div class="gritter-item">[[close]][[image]]<div class="[[class_name]]"><div class="gritter-title">[[title]]</div><div class="gritter-content">[[text]]</div></div><div style="clear:both"></div></div></div>',
 		_tpl_wrap: '<div id="gritter-notice-wrapper"></div>',
 	    
 		/**
@@ -100,7 +100,7 @@
 			}
 	        
 			// Basics
-			var user = params.title, 
+			var title = params.title, 
 				text = params.text,
 				image = params.image || '',
 				sticky = params.sticky || false,
@@ -132,8 +132,8 @@
 			
 			// String replacements on the template
 			tmp = this._str_replace(
-				['[[username]]', '[[text]]', '[[close]]', '[[image]]', '[[number]]', '[[class_name]]', '[[item_class]]'],
-				[user, text, this._tpl_close, image_str, this._item_count, class_name, item_class], tmp
+				['[[title]]', '[[text]]', '[[close]]', '[[image]]', '[[number]]', '[[class_name]]', '[[item_class]]'],
+				[title, text, this._tpl_close, image_str, this._item_count, class_name, item_class], tmp
 			);
 
             // If it's false, don't show another gritter message
