@@ -62,7 +62,6 @@
 	font-size:14px;
 	font-weight:bold;
 	padding:0 0 7px 0;
-	display:block;
 	text-shadow:1px 1px 0 #000; /* Not supported by IE :( */
 }
 .gritter-image {
