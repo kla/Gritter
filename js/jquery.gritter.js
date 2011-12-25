@@ -135,10 +135,9 @@
 			}
 
 			// String replacements on the template
-			tmp = this._str_replace(
-				['[[title]]', '[[text]]', '[[close]]', '[[image]]', '[[number]]', '[[class_name]]', '[[item_class]]'],
-				[title, text, this._tpl_close, image_str, this._item_count, class_name, item_class], tmp
-			);
+			tmp = this._str_replace(tmp,
+				{title: title, text: text, close: this._tpl_close, image: image_str,
+				 number: this._item_count, class_name: class_name, item_class: item_class});
 
             // If it's false, don't show another gritter message
 			if(this['_before_open_' + number]() === false){
@@ -353,48 +352,17 @@
 		},
 		
 		/**
-		* An extremely handy PHP function ported to JS, works well for templating
+		* Replace [[stuff]] in a string with other stuff.
 		* @private
-		* @param {String/Array} search A list of things to search for
-		* @param {String/Array} replace A list of things to replace the searches with
-		* @return {String} sa The output
-		*/  
-		_str_replace: function(search, replace, subject, count){
-		
-			var i = 0, j = 0, temp = '', repl = '', sl = 0, fl = 0,
-				f = [].concat(search),
-				r = [].concat(replace),
-				s = subject,
-				ra = r instanceof Array, sa = s instanceof Array;
-			s = [].concat(s);
-			
-			if(count){
-				this.window[count] = 0;
-			}
-		
-			for(i = 0, sl = s.length; i < sl; i++){
-				
-				if(s[i] === ''){
-					continue;
-				}
-				
-		        for (j = 0, fl = f.length; j < fl; j++){
-					
-					temp = s[i] + '';
-					repl = ra ? (r[j] !== undefined ? r[j] : '') : r[0];
-					s[i] = (temp).split(f[j]).join(repl);
-					
-					if(count && s[i] !== temp){
-						this.window[count] += (temp.length-s[i].length) / f[j].length;
-					}
-					
-				}
-			}
-			
-			return sa ? s : s[0];
-		    
+		* @param {String} source The source string
+		* @param {Hash} bindings Hash containing keys to replace with values
+		*/
+		_str_replace: function(source, bindings){
+			for (var name in bindings)
+				source = source.replace('[[' + name + ']]', (bindings[name] || "").toString().replace("[[","\\[\\["));
+			return source.replace("\\[\\[", "[[");
 		},
-		
+
 		/**
 		* A check to make sure we have something to wrap our notices with
 		* @private
