@@ -79,7 +79,7 @@
 		_item_count: 0,
 		_is_setup: 0,
 		_tpl_close: '<div class="gritter-close"></div>',
-		_tpl_item: '<div id="gritter-item-[[number]]" class="gritter-item-wrapper [[item_class]]" style="display:none"><div class="gritter-item">[[close]][[image]]<div class="[[class_name]]"><div class="gritter-title">[[title]]</div><div class="gritter-content">[[text]]</div></div><div style="clear:both"></div></div></div>',
+		_tpl_item: '<div id="gritter-item-[[number]]" class="gritter-item-wrapper [[item_class]]" style="display:none"><div class="gritter-item">[[close]][[image]]<div class="[[class_name]]">[[title]]<div class="gritter-content">[[text]]</div></div><div style="clear:both"></div></div></div>',
 		_tpl_wrap: '<div id="gritter-notice-wrapper"></div>',
 	    
 		/**
@@ -90,8 +90,8 @@
 		add: function(params){
 	        
 			// We might have some issues if we don't have a title or text!
-			if(!params.title || !params.text){
-				throw 'You need to fill out the first 2 params: "title" and "text"'; 
+			if(!params.text){
+				throw 'You need to fill out the param: "text"'; 
 			}
 			
 			// Check the options and set them once
@@ -129,7 +129,11 @@
 			
 			var image_str = (image != '') ? '<img src="' + image + '" class="gritter-image" />' : '',
 				class_name = (image != '') ? 'gritter-with-image' : 'gritter-without-image';
-			
+
+			if(title) {
+				title = "<div class=\"gritter-title\">" + title + "</div>";
+			}
+
 			// String replacements on the template
 			tmp = this._str_replace(
 				['[[title]]', '[[text]]', '[[close]]', '[[image]]', '[[number]]', '[[class_name]]', '[[item_class]]'],
