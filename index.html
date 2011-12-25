@@ -39,6 +39,9 @@
 			<a href="#" id="add-sticky">Add sticky notification</a>: Doesn't run on a fade timer.  Just sits there until the user manually removes it by clicking on the (X).
 		</li>
 		<li>
+			<a href="#" id="add-sticky-without-title">Add sticky notification without title</a>
+		</li>
+		<li>
 			<a href="#" id="add-without-image">Add notification without image</a>
 		</li>
         <li>
@@ -108,6 +111,23 @@
 
 			return false;
 
+		});
+
+		$('#add-sticky-without-title').click(function(){
+
+			var unique_id = $.gritter.add({
+				// (string | mandatory) the text inside the notification
+				text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eget tincidunt velit. Cum sociis natoque penatibus et <a href="#" style="color:#ccc">magnis dis parturient</a> montes, nascetur ridiculus mus.',
+				// (string | optional) the image to display on the left
+				image: 'http://s3.amazonaws.com/twitter_production/profile_images/132499022/myface_bigger.jpg',
+				// (bool | optional) if you want it to fade out on its own or just sit there
+				sticky: true,
+				// (int | optional) the time you want it to be alive for before fading out
+				time: '',
+				// (string | optional) the class name you want to apply to that specific message
+				class_name: 'my-sticky-class'
+			});
+			return false;
 		});
 
 		$('#add-regular').click(function(){
